@@ -14,7 +14,7 @@ ros::NodeHandle nh;
 std_msgs::String str_msg;
 ros::Publisher chatter("chatter", &str_msg);
 
-char hello[13] = "hello world!";
+char hello[15] = "Great success!";
 
 void setup()
 {

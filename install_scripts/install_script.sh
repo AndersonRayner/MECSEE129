@@ -37,6 +37,7 @@ sudo make install
 sudo apt install -y libogre-1.9-dev
 
 # Install the remaining dependencies
+cd ~/ros_catkin_ws/
 rosdep install --from-paths src --ignore-src --rosdistro melodic -y
 
 # Compile ROS (originally was -j2)
@@ -47,6 +48,11 @@ echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 
 # Install catkin tools
+# At this point, we can check everything worked by running roscore
+# If it goes, ctrl+c out of it and we can continue :)
+
+
+# Install catkin tools and rosserial dependencies
 sudo apt install -y python-pip
 sudo pip install -U catkin_tools
 sudo pip install pyserial
@@ -59,3 +65,6 @@ cd arduino-1.8.10
 sudo ./install.sh
 
 arduino --install-library "Rosserial Arduino Library"
+
+# Check Arduino worked
+arduino --version
