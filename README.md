@@ -36,7 +36,7 @@ The reboot should be pretty quick so wait a minute, then log back in using ssh.
 ### Download git
 git doesn't come installed by default so let's install it
 ```
-sudo apt install git
+sudo apt install -y git
 ```
 
 ### Install ROS and Arduino
@@ -80,7 +80,7 @@ Follow the instructions in /udev_rules/README.md.  This will set up udev rules f
 ### Flashing the Arduino
 Arduino was installed for us by the install script.  Now we need to flash our Arduino with some test code.  Enter the arduino_example/ directory of the ME/CS/EE 129 repo
 ```
-cd ~/MECSEE129/arduino_example/
+cd ~/MECSEE129/arduino_examples/
 ````
 Automation is great so there's a script to automatically flash your arduino for you with the example code for a ROS publisher
 ```
