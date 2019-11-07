@@ -72,13 +72,11 @@ catkin build
 source ~/catkin_ws/devel/setup.bash
 ```
 
-## Set Up Arduino
-### Adding our user to the dialout group
-Linux has permissions for everything and it turns out access a tty device (such as our Arduino) requires us to be in the dialout group.  Add your user to the dialout group with
-```
-sudo adduser pi dialout
-```
+## Set Up udev Rules
+Follow the instructions in /udev_rules/README.md.  This will set up udev rules for you so that your Arduino has a predictable name on boot.  It will also fix many of the permissions issues.
 
+
+## Set Up Arduino
 ### Flashing the Arduino
 Arduino was installed for us by the install script.  Now we need to flash our Arduino with some test code.  Enter the arduino_example/ directory of the ME/CS/EE 129 repo
 ```

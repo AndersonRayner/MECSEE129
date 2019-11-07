@@ -10,7 +10,7 @@ sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31
 sudo apt-get update
 
 # Install dependencies
-sudo apt install -y python-rosdep python-rosinstall-generator python-wstool python-rosinstall build-essential cmake
+sudo apt install -y python-rosdep python-rosinstall-generator python-wstool python-rosinstall build-essential cmake tmux
 
 # Initialise ROS
 sudo rosdep init
@@ -45,17 +45,20 @@ sudo apt install -y libogre-1.9-dev
 cd ~/ros_catkin_ws/
 rosdep install --from-paths src --ignore-src --rosdistro melodic -y
 
-# Compile ROS (originally was -j2)
+# Compile ROS
+# If this fails, our system might be out of RAM.  Try running it again with the -j4 flag changed to -j2 (and -j1 if that fails)
 sudo ~/ros_catkin_ws/src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic -j4
 
 # Source the melodic install so we can use it
+echo "" >> ~/.bashrc
+echo "# Source ROS installation" >> ~/.bashrc
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 
 # Install catkin tools
 # At this point, we can check everything worked by running roscore
 # If it goes, ctrl+c out of it and we can continue :)
-
+roscore
 
 # Install catkin tools and rosserial dependencies
 sudo apt install -y python-pip
