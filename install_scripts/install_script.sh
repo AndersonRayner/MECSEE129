@@ -41,7 +41,7 @@ sudo make install
 # Fix dependency for rviz (not that we're installing rviz)
 sudo apt install -y libogre-1.9-dev
 
-# Install the remaining dependencies
+# Install the remaining dependencies (this failed when running the system automatically)
 cd ~/ros_catkin_ws/
 rosdep install --from-paths src --ignore-src --rosdistro melodic -y
 

@@ -8,6 +8,30 @@ Put the boot_partition_files onto your SD  card (under  /boot/). Feel free to ed
 ## Log into the Raspberry Pi
 Eject the SD card, plug it into the RaspberryPi, and plug gthe RaspberryPi into power.  It will boot and, given the wpa_supplicant.conf file is correct, will connect to your network.  Log into your RaspberryPi with uname: pi, p/w: raspberry
 
+## Change your password
+First thing we should do is change the password for the Raspberry Pi.  There's a nice GUI tool for doing this which can be started using
+```
+sudo raspi-config
+```
+From here, you can navigate using the keys.  Firstly change the user password
+```
+1 Change User Password
+```
+and then change the hostname
+```
+2 Network Options > N1 Hostname
+```
+When you've updated the password and hostname, use the left arrow key and select Finish.
+
+## Reboot your Pi
+Now's a good time to reboot your Pi so that everything is updated correctly
+```
+sudo reboot
+```
+
+The reboot should be pretty quick so wait a minute, then log back in using ssh.
+
+
 ## Get ROS Setup
 ### Download git
 git doesn't come installed by default so let's install it
@@ -25,6 +49,7 @@ and then run the installer script.  (The installer script isn't quite automatic 
 cd ~/MECSEE129/install_scripts/
 #./install_script.sh
 ```
+Because the installer script doesn't work automatically (someone feel free to submit a PR to fix this @_@), the easiest way to get all the data across is to open the file on your laptop and copy/paste the sections across manually.  This process is rather time consuming and will take up to about 2 hours (most of this is ROS compile time).
 
 ### Create a Workspace
 We now need to create a workspace where we can develop our ROS code
