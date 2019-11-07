@@ -124,7 +124,7 @@ and then we can list what topics are being published
 ```
 rostopic list
 ```
-There should be a topic /chatter being published.  Let's see what it's saying
+There should be a topic /did_it_work being published.  Let's see what it's saying
 ```
-rostopic echo /chatter
+rostopic echo /did_it_work
 ```

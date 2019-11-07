@@ -1,8 +1,3 @@
-/*
- * rosserial Publisher Example
- * Prints "hello world!"
- */
-
 // Use the following line if you have a Leonardo or MKR1000
 //#define USE_USBCON
 
@@ -12,9 +7,9 @@
 ros::NodeHandle nh;
 
 std_msgs::String str_msg;
-ros::Publisher chatter("chatter", &str_msg);
+ros::Publisher string_pub("did_it_work", &str_msg);
 
-char hello[15] = "Great success!";
+char msg_str[15] = "Great success!";
 
 void setup()
 {
@@ -23,13 +18,17 @@ void setup()
 
   // Initialise ROS
   nh.initNode();
-  nh.advertise(chatter);
+  nh.advertise(string_pub);
+
 }
 
 void loop()
 {
+  // Fill the ROS message with data
+  str_msg.data = msg_str;
+
   // Publish our ROS message
-  chatter.publish( &str_msg );
+  string_pub.publish( &str_msg );
   nh.spinOnce();
 
   // Change the LED
@@ -37,4 +36,5 @@ void loop()
 
   // Wait
   delay(250);
+
 }
