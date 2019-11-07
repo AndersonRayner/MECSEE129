@@ -111,7 +111,7 @@ source ~/catkin_ws/devel/setup.bash
 ```
 And then we can run our ROS node (rosserial_arduino)
 ```
-rosrun rosserial_arduino serial_node.py _port:=/dev/ttyACM0
+rosrun rosserial_arduino serial_node.py _port:=/dev/ttyArduino
 ```
 If our Arduino is not device ttyACM0 we should change the above line accordingly
 
