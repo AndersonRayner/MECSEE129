@@ -18,14 +18,23 @@ char hello[15] = "Great success!";
 
 void setup()
 {
+  // Set up an LED so we can see what's happening
+  pinMode(LED_BUILTIN, OUTPUT);
+
+  // Initialise ROS
   nh.initNode();
   nh.advertise(chatter);
 }
 
 void loop()
 {
-  str_msg.data = hello;
+  // Publish our ROS message
   chatter.publish( &str_msg );
   nh.spinOnce();
-  delay(1000);
+
+  // Change the LED
+  digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+
+  // Wait
+  delay(250);
 }
