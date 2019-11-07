@@ -1,0 +1,9 @@
+# udev Rules for the Arduino Boards
+# ---------------------------------
+
+# Fix the owners of all the USB serial devices
+KERNEL=="ttyUSB[0-9]*",MODE="0666"
+KERNEL=="ttyACM[0-9]*",MODE="0666"
+
+# Arduino MEGA 2560
+SUBSYSTEM=="tty", ATTRS{manufacturer}=="Arduino (www.arduino.cc)", ATTRS{serial}=="XXXXXXXXXX", SYMLINK+="ttyArduino"
