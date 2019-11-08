@@ -20,6 +20,7 @@ mkdir ~/ros_catkin_ws
 cd ~/ros_catkin_ws
 
 # Code for installing lite version
+# This is missing some dependencies for later so let's just go the full install for now
 #rosinstall_generator ros_comm --rosdistro melodic --deps --wet-only --tar > melodic-ros_comm-wet.rosinstall
 #wstool init -j8 src melodic-ros_comm-wet.rosinstall
 
@@ -38,7 +39,7 @@ cmake .
 make
 sudo make install
 
-# Fix dependency for rviz (not that we're installing rviz)
+# Fix dependency for rviz
 sudo apt install -y libogre-1.9-dev
 
 # Install the remaining dependencies (this failed when running the system automatically)
@@ -46,8 +47,8 @@ cd ~/ros_catkin_ws/
 rosdep install --from-paths src --ignore-src --rosdistro melodic -y
 
 # Compile ROS
-# If this fails, our system might be out of RAM.  Try running it again with the -j4 flag changed to -j2 (and -j1 if that fails)
-sudo ~/ros_catkin_ws/src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic -j4
+# If this fails, our system might be out of RAM.  If so, increase the swap space to 2 GB (google it)
+sudo ~/ros_catkin_ws/src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic -j2
 
 # Source the melodic install so we can use it
 echo "" >> ~/.bashrc
