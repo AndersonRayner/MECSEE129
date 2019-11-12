@@ -80,14 +80,14 @@ sudo reboot
 The reboot should be pretty quick so wait a minute, then log back in using ssh.
 
 
-## Get ROS Setup
-### Download git
+# Get ROS Setup
+## Download git
 git doesn't come installed by default so let's install it
 ```
 sudo apt install -y git
 ```
 
-### Install ROS and Arduino
+## Install ROS and Arduino
 Installing ROS on a Raspberry Pi 4 is a little difficult so this repo contains an install script.  Firstly, clone the git repo
 ```
 git clone https://github.com/AndersonRayner/MECSEE129.git
@@ -99,7 +99,7 @@ cd ~/MECSEE129/install_scripts/
 ```
 Because the installer script doesn't work automatically (someone feel free to submit a PR to fix this @_@), the easiest way to get all the data across is to open the file on your laptop and copy/paste the sections across manually.  This process is rather time consuming and will take up to about 2 hours (most of this is ROS compile time).
 
-### Create a Workspace
+## Create a Workspace
 We now need to create a workspace where we can develop our ROS code
 ```
 mkdir -p ~/catkin_ws/src/
@@ -108,7 +108,7 @@ catkin init
 ```
 This should initialise our workspace for us.
 
-### Build the rosserial Package
+## Build the rosserial Package
 ```
 cd src/
 git clone https://github.com/ros-drivers/rosserial.git
@@ -119,12 +119,12 @@ catkin build
 source ~/catkin_ws/devel/setup.bash
 ```
 
-## Set Up udev Rules
+# Set Up udev Rules
 Follow the instructions in /udev_rules/README.md.  This will set up udev rules for you so that your Arduino has a predictable name on boot.  It will also fix many of the permissions issues.
 
 
-## Set Up Arduino
-### Flashing the Arduino
+# Set Up Arduino
+## Flashing the Arduino
 Arduino was installed for us by the install script.  Now we need to flash our Arduino with some test code.  Enter the arduino_example/ directory of the ME/CS/EE 129 repo
 ```
 cd ~/MECSEE129/arduino_examples/
@@ -134,20 +134,20 @@ Automation is great so there's a script to automatically flash your arduino for 
 ./flash_arduino.sh
 ```
 
-## Running Our First ROS Node
+# Running Our First ROS Node
 Now everything is set up, let's try it all out.  Log out of your Raspberry Pi to make sure everything is sourced correctly for each of the terminals
 ```
 logout
 ```
 Log back in with  three different terminals and run the following
 
-### Terminal 1
+## Terminal 1
 Terminal 1 will run roscore for us.  If our .bashrc was set correctly, we can just run
 ```
 roscore
 ```
 
-### Terminal 2
+## Terminal 2
 Terminal 2 is where we'll run our ROS node.  Change directory to catkin workspace
 ```
 cd ~/catkin_ws/
@@ -162,7 +162,7 @@ rosrun rosserial_arduino serial_node.py _port:=/dev/ttyArduino
 ```
 If our Arduino is not device ttyACM0 we should change the above line accordingly
 
-### Terminal 3
+## Terminal 3
 Terminal 3 is where we're going to rostopic echo what our node is publishing.  Once again, we need to source our catkin workspace
 ```
 source ~/catkin_ws/devel/setup.bash
@@ -175,3 +175,13 @@ There should be a topic /did_it_work being published.  Let's see what it's sayin
 ```
 rostopic echo /did_it_work
 ```
+
+# Submission
+There we go!  It all works!  Screenshot your system working and submit the image as per the instruction on the assignment sheet (an example is screenshot is available in /example_submission/).  The example case has an additional window running htop (task manager) and has been automated using a tmux script (available in /tmux_script/boot_ROS.sh).
+
+# Power Off
+We don't want to waste power so no is probably a good time to turn everything off.  We want to do a full powerdown of everything so simply type 
+```
+sudo poweroff
+```
+into one of the terminals.
