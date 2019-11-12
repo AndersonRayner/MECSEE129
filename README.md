@@ -1,12 +1,60 @@
 # MECSEE129
-Files for ME/CS/EE 129
+Files and instructions for ME/CS/EE 129
 
 # Getting Started
+## Install the Raspberry Pi into the Case
+Electronics like the Raspberry Pi are somewhat delicate so it's always a good idea to put them into a case.  Raspberry Pi 4s also have an overheating problem so this case comes with a fan to keep the Pi cool.  The fan cables need to be connected to 
+```
+Red: 5V
+Black: GND
+```
+as per the pinout given at
+```
+https://www.jameco.com/Jameco/workshop/circuitnotes/raspberry_pi_circuit_note_fig2.jpg
+```
+The fan should be blowing into the case.  Also remember to attached the heatsinks to the three largest parts if the Raspberry Pi.
+
 ## Flash SD card using Balena
-Put the boot_partition_files onto your SD  card (under  /boot/). Feel free to edit wpa_suppicant.conf to add your own networks
+Download the Raspian Buster Lite image from 
+```
+https://downloads.raspberrypi.org/raspbian_lite_latest
+```
+and Balena Etcher from 
+```
+https://www.balena.io/etcher/
+```
+Start Balena Etcher, follow the prompts and flash the Raspian image onto the SD card.  Once finished, remove and re-insert the SD card into your computer, and put the /boot_partition_files/ onto your SD card (under  /boot/). Feel free to edit wpa_suppicant.conf to add your own networks.
 
 ## Log into the Raspberry Pi
-Eject the SD card, plug it into the RaspberryPi, and plug gthe RaspberryPi into power.  It will boot and, given the wpa_supplicant.conf file is correct, will connect to your network.  Log into your RaspberryPi with uname: pi, p/w: raspberry
+### First Power On
+Eject the SD card from the computer, plug it into the Raspberry Pi, and plug the Raspberry Pi into power.  It will boot and, given the wpa_supplicant.conf file is correct, will connect to your network. 
+
+### Finding the Raspberry Pi on the Network
+The Raspberry Pi is assigned a random IP address by the router's DHCP server.  To find the IP address of the Raspberry Pi, open a web browser and navigate to 192.168.1.1.  The p/w of the router is MECSEE129.  From there, navigate to wireless clients and look for the device named raspberrypi.
+
+Alternativly, if your computer has a zeroconf service, you can access your Raspberry Pi with the host name raspberrypi.local.
+
+### Logging In
+Log into the Raspberry Pi over ssh with the credentials
+```
+uname: pi
+p/w: raspberry
+```
+Linux and Mac users should be able to open a terminal and type
+```
+ssh pi@192.168.1.XXX
+```
+where XXX is the last three numbers of the Raspberry Pi's IP address.
+
+Windows doesn't have out-of-the-box ssh support so you need PuTTY.  PuTTY can be downloaded from 
+```
+https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
+```
+PuTTY automatically puts the ssh in so only 
+```
+pi@192.168.1.XXX
+```
+is required.
 
 ## Change your password
 First thing we should do is change the password for the Raspberry Pi.  There's a nice GUI tool for doing this which can be started using
@@ -40,7 +88,7 @@ sudo apt install -y git
 ```
 
 ### Install ROS and Arduino
-Install ROS on a RaspberryPi 4 is a little difficult so this repo contains an install script.  Firstly, clone the git repo
+Installing ROS on a Raspberry Pi 4 is a little difficult so this repo contains an install script.  Firstly, clone the git repo
 ```
 git clone https://github.com/AndersonRayner/MECSEE129.git
 ```
@@ -88,7 +136,7 @@ Automation is great so there's a script to automatically flash your arduino for 
 ```
 
 ## Running Our First ROS Node
-Now everything is set up, let's try it all out.  Log out of your RaspberryPi to make sure everything is sourced correctly for each of the terminals
+Now everything is set up, let's try it all out.  Log out of your Raspberry Pi to make sure everything is sourced correctly for each of the terminals
 ```
 logout
 ```
