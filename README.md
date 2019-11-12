@@ -112,7 +112,6 @@ This should initialise our workspace for us.
 ```
 cd src/
 git clone https://github.com/ros-drivers/rosserial.git
-#git clone https://github.com/ros/common_msgs.git (1.12.6) <- this I'm trying to remove the need for this one
 ```
 Now we have rosserial, we should be able to build with catkin tools (don't forget to source the workspace after the build)
 ```

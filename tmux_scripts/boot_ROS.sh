@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "Starting ROS and pyserial ROS node using a (bad) tmux script"
+
 SESSION=dev
 
 # Create the new session
@@ -17,16 +19,18 @@ tmux split-window -h -t $SESSION:0.0
 tmux send-keys -t $SESSION:0.0 'htop' C-m
 
 # Start ROS
-tmux send-keys -t $SESSION:0.1 '#roscore' C-m
-sleep 1
+tmux send-keys -t $SESSION:0.1 'roscore' C-m
+sleep 7
 
 # Start the rosnode pyserial
 tmux send-keys -t $SESSION:0.2 'cd ~/catkin_ws/' C-m
 tmux send-keys -t $SESSION:0.2 'source ~/catkin_ws/devel/setup.bash' C-m
 tmux send-keys -t $SESSION:0.2 'rosrun rosserial_arduino serial_node.py _port:=/dev/ttyArduino' C-m
+sleep 5
 
 # Put kill sess ready to go
-tmux send-keys -t $SESSION:0.3 'tmux kill-session'
+tmux send-keys -t $SESSION:0.3 'rostopic list' C-m
+#tmux send-keys -t $SESSION:0.3 'tmux kill-session'
 
 # Open the session up
 tmux -2 attach-session -t $SESSION:0
